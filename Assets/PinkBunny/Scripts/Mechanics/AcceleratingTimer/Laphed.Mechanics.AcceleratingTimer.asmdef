@@ -1,6 +1,6 @@
 {
-    "name": "Laphed.Mechanics.QTE",
-    "rootNamespace": "Laphed.Mechanics.QTE",
+    "name": "Laphed.Mechanics.AcceleratingTimer",
+    "rootNamespace": "Laphed.Mechanics.AcceleratingTimer",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
