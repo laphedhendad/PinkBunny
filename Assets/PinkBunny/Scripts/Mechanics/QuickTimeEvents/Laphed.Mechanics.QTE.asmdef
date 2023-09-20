@@ -1,0 +1,14 @@
+{
+    "name": "Laphed.Mechanics.QTE",
+    "rootNamespace": "Laphed.Mechanics.QTE",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
