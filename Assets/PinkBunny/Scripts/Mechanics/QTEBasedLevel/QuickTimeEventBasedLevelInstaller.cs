@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Laphed.Mechanics.QTEBasedLevel
 {
-    public class QTEBasedLevelInstaller: MonoInstaller
+    public class QuickTimeEventBasedLevelInstaller: MonoInstaller
     {
         public override void InstallBindings()
         {

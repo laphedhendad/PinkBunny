@@ -5,12 +5,12 @@ using Zenject;
 
 namespace Laphed.Mechanics.QTEBasedLevel
 {
-    public class QTEBasedLevel: ILevelCompletedHandler, ILevelFailedHandler, IDisposable
+    public class QuickTimeEventBasedLevel: ILevelCompletedHandler, ILevelFailedHandler, IDisposable
     {
         private readonly IExitPointEventsRegistrar eventBus;
         
         [Inject]
-        public QTEBasedLevel(IExitPointEventsRegistrar eventBus)
+        public QuickTimeEventBasedLevel(IExitPointEventsRegistrar eventBus)
         {
             this.eventBus = eventBus;
             eventBus.SubscribeOnLevelCompleted(this);
