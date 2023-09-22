@@ -23,10 +23,16 @@ namespace Laphed.Mechanics.AcceleratingTimer
             this.coroutineProvider = coroutineProvider;
         }
 
-        public void Start(AnimationCurve curve)
+        public void Initialize(AnimationCurve curve)
         {
             this.curve = curve;
             realDuration = curve.keys[^1].time;
+        }
+
+        public void Start()
+        {
+            if (curve == null) throw new StartNotInitializedTimerException();
+            
             currentTime = 0;
             timerCoroutine = coroutineProvider.StartCoroutine(RealTimerCoroutine());
         }
@@ -45,6 +51,11 @@ namespace Laphed.Mechanics.AcceleratingTimer
             if (timerCoroutine != null) throw new ContinueNotStoppedTimerException();
 
             timerCoroutine = coroutineProvider.StartCoroutine(RealTimerCoroutine());
+        }
+
+        public void UpdateCurve(AnimationCurve curve)
+        {
+            Initialize(curve);
         }
 
         private void End()

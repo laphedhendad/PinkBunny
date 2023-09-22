@@ -1,14 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Laphed.Mechanics.AcceleratingTimer
 {
-    public interface IAcceleratingTimer
+    public interface IAcceleratingTimer: ITimer
     {
-        void Start(AnimationCurve curve);
-        event Action OnTimerEnd;
-        event Action<float> OnTicked;
-        void Stop();
-        void Continue();
+        void Initialize(AnimationCurve curve);
+        void UpdateCurve(AnimationCurve curve);
     }
 }
