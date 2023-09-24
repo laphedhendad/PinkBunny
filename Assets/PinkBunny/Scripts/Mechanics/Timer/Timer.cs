@@ -6,32 +6,25 @@ using UnityEngine;
 
 namespace Laphed.Mechanics.AcceleratingTimer
 {
-    public class AcceleratingTimer: IAcceleratingTimer
+    public class Timer: ITimer
     {
         public event Action OnTimerEnd;
         public event Action<float> OnTicked;
         
-        private AnimationCurve curve;
-        private float currentTime;
+        protected float currentTime;
+        protected float duration;
+
         private Coroutine timerCoroutine;
-        private float realDuration;
-        
         private readonly ICoroutineProvider coroutineProvider;
 
-        public AcceleratingTimer(ICoroutineProvider coroutineProvider)
+        public Timer(ICoroutineProvider coroutineProvider)
         {
             this.coroutineProvider = coroutineProvider;
         }
 
-        public void Initialize(AnimationCurve curve)
+        public virtual void Start()
         {
-            this.curve = curve;
-            realDuration = curve.keys[^1].time;
-        }
-
-        public void Start()
-        {
-            if (curve == null) throw new StartNotInitializedTimerException();
+            if(timerCoroutine != null) coroutineProvider.StopCoroutine(timerCoroutine);
             
             currentTime = 0;
             timerCoroutine = coroutineProvider.StartCoroutine(RealTimerCoroutine());
@@ -45,17 +38,11 @@ namespace Laphed.Mechanics.AcceleratingTimer
             timerCoroutine = null;
         }
 
-        public void Continue()
+        public virtual void Continue()
         {
-            if (curve == null) throw new ContinueNotStartedTimerException();
             if (timerCoroutine != null) throw new ContinueNotStoppedTimerException();
 
             timerCoroutine = coroutineProvider.StartCoroutine(RealTimerCoroutine());
-        }
-
-        public void UpdateCurve(AnimationCurve curve)
-        {
-            Initialize(curve);
         }
 
         private void End()
@@ -63,14 +50,14 @@ namespace Laphed.Mechanics.AcceleratingTimer
             OnTimerEnd?.Invoke();
         }
 
-        private void Tick()
+        protected virtual void Tick()
         {
-            OnTicked?.Invoke(GetCurrentValue(currentTime));
+            OnTicked?.Invoke(currentTime);
         }
 
         private IEnumerator RealTimerCoroutine()
         {
-            while (currentTime < realDuration)
+            while (currentTime < duration)
             {
                 currentTime += Time.deltaTime;
                 Tick();
@@ -81,9 +68,9 @@ namespace Laphed.Mechanics.AcceleratingTimer
             End();
         }
 
-        private float GetCurrentValue(float realTime)
+        protected void InvokeOnTicked(float value)
         {
-            return curve.Evaluate(realTime);
+            OnTicked?.Invoke(value);
         }
     }
 }
