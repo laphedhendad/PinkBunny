@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using Laphed.Utils.CoroutineProvider;
+﻿using Laphed.Utils.CoroutineProvider;
 using Laphed.Utils.ExceptionsHandler;
 using UnityEngine;
 
@@ -14,7 +12,7 @@ namespace Laphed.Mechanics.AcceleratingTimer
         {
         }
 
-        public void Initialize(AnimationCurve curve)
+        private void Initialize(AnimationCurve curve)
         {
             this.curve = curve;
             duration = curve.keys[^1].time;

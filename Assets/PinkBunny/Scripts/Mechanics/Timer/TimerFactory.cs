@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Laphed.Mechanics.AcceleratingTimer
 {
-    public class TimerFactory: ITimerFactory<ITimer>, ITimerFactory<IAcceleratingTimer>
+    public class TimerFactory: ITimerFactory<IUpdatableTimer>, ITimerFactory<IAcceleratingTimer>
     {
         private readonly ICoroutineProvider coroutineProvider;
 
@@ -13,9 +13,9 @@ namespace Laphed.Mechanics.AcceleratingTimer
             this.coroutineProvider = coroutineProvider;
         }
         
-        ITimer ITimerFactory<ITimer>.Create()
+        IUpdatableTimer ITimerFactory<IUpdatableTimer>.Create()
         {
-            return new Timer(coroutineProvider);
+            return new UpdatableTimer(coroutineProvider);
         }
 
         IAcceleratingTimer ITimerFactory<IAcceleratingTimer>.Create()
