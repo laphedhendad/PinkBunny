@@ -2,7 +2,7 @@
 using Laphed.Utils.ExceptionsHandler;
 using UnityEngine;
 
-namespace Laphed.Mechanics.AcceleratingTimer
+namespace Laphed.Mechanics.Timer
 {
     public class AcceleratingTimer: Timer, IAcceleratingTimer
     {
@@ -12,9 +12,9 @@ namespace Laphed.Mechanics.AcceleratingTimer
         {
         }
 
-        private void Initialize(AnimationCurve curve)
+        private void Initialize(AcceleratingTimerSettings settings)
         {
-            this.curve = curve;
+            curve = settings.curve;
             duration = curve.keys[^1].time;
         }
 
@@ -32,9 +32,9 @@ namespace Laphed.Mechanics.AcceleratingTimer
             base.Continue();
         }
 
-        public void UpdateCurve(AnimationCurve curve)
+        public void UpdateCurve(AcceleratingTimerSettings settings)
         {
-            Initialize(curve);
+            Initialize(settings);
         }
 
         protected override void Tick()

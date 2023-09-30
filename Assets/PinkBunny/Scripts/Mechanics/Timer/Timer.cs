@@ -4,7 +4,7 @@ using Laphed.Utils.CoroutineProvider;
 using Laphed.Utils.ExceptionsHandler;
 using UnityEngine;
 
-namespace Laphed.Mechanics.AcceleratingTimer
+namespace Laphed.Mechanics.Timer
 {
     public class Timer: ITimer
     {
