@@ -1,12 +1,12 @@
 {
-    "name": "Laphed.Mechanics.Timer",
-    "rootNamespace": "Laphed.Mechanics.Timer",
+    "name": "Laphed.AnimationCurveInspectorExtension.Editor",
+    "rootNamespace": "Laphed.AnimationCurveInspectorExtension",
     "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:3ff407546b24b1b429788b09c9735532",
-        "GUID:a5e5fce344adccb418d67fcb589163dc"
+        "GUID:8e7a1a00658e5ff4cb53c82102982b85"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
