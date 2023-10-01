@@ -16,20 +16,31 @@ namespace Laphed.AnimationCurveInspectorExtension
             
             SerializedProperty curveProperty = property.FindPropertyRelative("curve");
             SerializedProperty pointsProperty = property.FindPropertyRelative("keyPoints");
+            SerializedProperty bindValuesProperty = property.FindPropertyRelative("bindPointsValues");
 
 
-            AnimationCurve curve = new AnimationCurve();
-            
-            for (int i = 0; i < pointsProperty.arraySize; i++)
+            AnimationCurve curve = curveProperty.animationCurveValue;
+
+            if (bindValuesProperty.boolValue)
             {
-                SerializedProperty pointProperty = pointsProperty.GetArrayElementAtIndex(i);
-                curve.AddKey(pointProperty.vector2Value.x, pointProperty.vector2Value.y);
+                curve = new AnimationCurve();
+                
+                for (int i = 0; i < pointsProperty.arraySize; i++)
+                {
+                    SerializedProperty pointProperty = pointsProperty.GetArrayElementAtIndex(i);
+                    curve.AddKey(pointProperty.vector2Value.x, pointProperty.vector2Value.y);
+                }
             }
             
             curveProperty.animationCurveValue = curve;
             
             EditorGUILayout.PropertyField(curveProperty, new GUIContent("Curve"));
-            EditorGUILayout.PropertyField(pointsProperty, new GUIContent("Points"), true);
+            EditorGUILayout.PropertyField(bindValuesProperty, new GUIContent("Set Points From List"));
+            
+            if (bindValuesProperty.boolValue)
+            {
+                EditorGUILayout.PropertyField(pointsProperty, new GUIContent("Points"), true);
+            }
 
             EditorGUI.indentLevel = indent;
 

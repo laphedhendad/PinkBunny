@@ -9,6 +9,7 @@ namespace Laphed.AnimationCurveInspectorExtension
     {
         public AnimationCurve curve;
 #if UNITY_EDITOR
+        [SerializeField] private bool bindPointsValues;
         [SerializeField] private List<Vector2> keyPoints;
 #endif
     }
