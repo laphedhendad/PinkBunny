@@ -1,4 +1,4 @@
-﻿namespace Laphed.Utils.ExceptionsHandler
+﻿namespace Laphed.ExceptionsHandler
 {
     public class ContinueNotStartedTimerException: CustomException
     {

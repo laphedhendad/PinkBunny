@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Laphed.Mechanics.Timer
+namespace Laphed.Timer
 {
     public interface ITimer
     {

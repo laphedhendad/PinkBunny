@@ -1,4 +1,4 @@
-﻿namespace Laphed.Mechanics.Timer.UI
+﻿namespace Laphed.Timer.UI
 {
     public interface ITimerView
     {

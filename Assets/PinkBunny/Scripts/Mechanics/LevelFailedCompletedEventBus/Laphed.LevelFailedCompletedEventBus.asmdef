@@ -1,6 +1,6 @@
 {
-    "name": "Laphed.Utils.CoroutineProvider",
-    "rootNamespace": "Laphed.Utils.CoroutineProvider",
+    "name": "Laphed.LevelFailedCompletedEventBus",
+    "rootNamespace": "Laphed.LevelEventBus",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

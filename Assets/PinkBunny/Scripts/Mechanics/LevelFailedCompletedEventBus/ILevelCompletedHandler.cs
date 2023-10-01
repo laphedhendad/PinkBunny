@@ -1,4 +1,4 @@
-﻿namespace Laphed.Mechanics.LevelEventBus
+﻿namespace Laphed.LevelEventBus
 {
     public interface ILevelCompletedHandler
     {

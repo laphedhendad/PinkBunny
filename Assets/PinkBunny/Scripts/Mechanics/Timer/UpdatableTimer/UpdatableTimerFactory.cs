@@ -1,7 +1,7 @@
-﻿using Laphed.Utils.CoroutineProvider;
+﻿using Laphed.CoroutineProvider;
 using Zenject;
 
-namespace Laphed.Mechanics.Timer
+namespace Laphed.Timer
 {
     public class UpdatableTimerFactory: TimerFactoryBase, ITimerFactory<IUpdatableTimer>
     {

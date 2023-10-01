@@ -1,6 +1,6 @@
 {
-    "name": "Laphed.Mechanics.LevelFailedCompletedEventBus",
-    "rootNamespace": "Laphed.Mechanics.LevelEventBus",
+    "name": "Laphed.AnimationCurveInspectorExtension",
+    "rootNamespace": "Laphed.AnimationCurveInspectorExtension",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

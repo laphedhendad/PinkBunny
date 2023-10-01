@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
-using Laphed.Utils.CoroutineProvider;
-using Laphed.Utils.ExceptionsHandler;
+using Laphed.CoroutineProvider;
+using Laphed.ExceptionsHandler;
 using UnityEngine;
 
-namespace Laphed.Mechanics.Timer
+namespace Laphed.Timer
 {
     public class Timer: ITimer
     {

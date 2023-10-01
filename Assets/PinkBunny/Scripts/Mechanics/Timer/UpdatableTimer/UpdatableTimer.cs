@@ -1,6 +1,6 @@
-﻿using Laphed.Utils.CoroutineProvider;
+﻿using Laphed.CoroutineProvider;
 
-namespace Laphed.Mechanics.Timer
+namespace Laphed.Timer
 {
     public class UpdatableTimer: Timer, IUpdatableTimer
     {

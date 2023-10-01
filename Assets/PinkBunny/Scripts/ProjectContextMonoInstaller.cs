@@ -1,4 +1,4 @@
-using Laphed.Utils.CoroutineProvider;
+using Laphed.CoroutineProvider;
 using UnityEngine;
 using Zenject;
 
