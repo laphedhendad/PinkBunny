@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Laphed.Utils.CoroutineProvider
+namespace Laphed.CoroutineProvider
 {
     public class CoroutineProvider: MonoBehaviour, ICoroutineProvider
     {

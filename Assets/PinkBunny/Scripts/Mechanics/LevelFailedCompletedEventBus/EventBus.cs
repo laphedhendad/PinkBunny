@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Laphed.Mechanics.LevelEventBus
+namespace Laphed.LevelEventBus
 {
     public class EventBus: IExitPointEventsRaiser, IExitPointEventsRegistrar
     {

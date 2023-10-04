@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Laphed.Utils.ExceptionsHandler
+namespace Laphed.ExceptionsHandler
 {
     public static class ExceptionsLogger
     {

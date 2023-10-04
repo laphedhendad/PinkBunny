@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Laphed.Utils.ExceptionsHandler
+namespace Laphed.ExceptionsHandler
 {
     public abstract class CustomException: Exception
     {
