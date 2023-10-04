@@ -12,6 +12,6 @@ public class ProjectContextMonoInstaller : MonoInstaller
 
     private void BindUtils()
     {
-        Container.Bind<CoroutineProvider>().FromInstance(coroutineProvider).AsSingle();
+        Container.Bind<ICoroutineProvider>().FromInstance(coroutineProvider).AsSingle();
     }
 }
