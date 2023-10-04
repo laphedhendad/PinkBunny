@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Laphed.Timer
 {
-    public class AcceleratingTimerFactory: TimerFactoryBase, ITimerFactory<IAcceleratingTimer>
+    public class AcceleratingTimerFactory: TimerFactoryBase, IFactory<IAcceleratingTimer>
     {
         [Inject]
         public AcceleratingTimerFactory(ICoroutineProvider coroutineProvider) : base(coroutineProvider)

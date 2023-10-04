@@ -15,7 +15,7 @@ namespace Laphed.Timer
         private void Initialize(AcceleratingTimerSettings settings)
         {
             curve = settings.curve;
-            duration = curve.keys[^1].time;
+            Duration = curve.keys[^1].time;
         }
 
         public override void Start()
@@ -44,7 +44,7 @@ namespace Laphed.Timer
 
         private float GetCurrentValue(float realTime)
         {
-            return curve.Evaluate(realTime);
+            return curve.Evaluate(Duration - realTime);
         }
     }
 }

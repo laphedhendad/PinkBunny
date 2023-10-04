@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Laphed.Timer
 {
-    public class TimerFactory: TimerFactoryBase, ITimerFactory<ITimer>
+    public class TimerFactory: TimerFactoryBase, IFactory<ITimer>
     {
         [Inject]
         public TimerFactory(ICoroutineProvider coroutineProvider) : base(coroutineProvider)

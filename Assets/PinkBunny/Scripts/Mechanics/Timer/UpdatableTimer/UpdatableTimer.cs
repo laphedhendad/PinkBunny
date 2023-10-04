@@ -10,7 +10,7 @@ namespace Laphed.Timer
 
         public void SetDuration(float newDuration)
         {
-            duration = newDuration;
+            Duration = newDuration;
         }
     }
 }

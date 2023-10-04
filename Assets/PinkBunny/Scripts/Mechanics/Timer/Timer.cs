@@ -12,7 +12,7 @@ namespace Laphed.Timer
         public event Action<float> OnTicked;
         
         protected float currentTime;
-        protected float duration;
+        public float Duration { get; protected set; }
 
         private Coroutine timerCoroutine;
         private readonly ICoroutineProvider coroutineProvider;
@@ -26,7 +26,7 @@ namespace Laphed.Timer
         {
             if(timerCoroutine != null) coroutineProvider.StopCoroutine(timerCoroutine);
             
-            currentTime = 0;
+            currentTime = Duration;
             timerCoroutine = coroutineProvider.StartCoroutine(RealTimerCoroutine());
         }
         
@@ -47,6 +47,7 @@ namespace Laphed.Timer
 
         private void End()
         {
+            Stop();
             OnTimerEnd?.Invoke();
         }
 
@@ -57,9 +58,9 @@ namespace Laphed.Timer
 
         private IEnumerator RealTimerCoroutine()
         {
-            while (currentTime < duration)
+            while (currentTime > 0)
             {
-                currentTime += Time.deltaTime;
+                currentTime -= Time.deltaTime;
                 Tick();
                 
                 yield return new WaitForEndOfFrame();
