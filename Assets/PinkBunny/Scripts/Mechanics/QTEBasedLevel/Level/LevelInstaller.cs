@@ -40,18 +40,16 @@ namespace Laphed.QTEBasedLevel
         private void BindLevel()
         {
             Container.Bind<IQteQueue>().To<QteQueue>().AsSingle();
-            Container.Bind<LevelExitPointsTracker>().AsSingle();
+            Container.Bind<LevelExitPointsBinder>().AsSingle();
             Container.BindInterfacesAndSelfTo<Level>().AsSingle();
             Container.BindInterfacesTo<LevelBuilder>().AsSingle();
         }
 
         private void RegisterGlobalEvents()
         {
-            Container.Resolve<LevelExitPointsTracker>();
+            Container.Resolve<LevelExitPointsBinder>();
             var eventBus = Container.Resolve<IExitPointEventsRegistrar>();
             var level = Container.Resolve<Level>();
-            eventBus.SubscribeOnLevelCompleted(level);
-            eventBus.SubscribeOnLevelFailed(level);
         }
 
         private void BindUI()

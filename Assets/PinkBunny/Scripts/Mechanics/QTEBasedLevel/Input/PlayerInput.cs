@@ -22,12 +22,14 @@ namespace Laphed.QTEBasedLevel
 
         public void Enable()
         {
+            gameInput.UI.Disable();
             gameInput.Gameplay.Enable();
         }
 
         public void Disable()
         {
             gameInput.Gameplay.Disable();
+            gameInput.UI.Enable();
         }
 
         private void SubscribeOnInputEvents()

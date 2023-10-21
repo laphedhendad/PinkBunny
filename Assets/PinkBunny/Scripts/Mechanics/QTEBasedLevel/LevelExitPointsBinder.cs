@@ -5,14 +5,14 @@ using Zenject;
 
 namespace Laphed.QTEBasedLevel
 {
-    public class LevelExitPointsTracker: IDisposable
+    public class LevelExitPointsBinder: IDisposable
     {
         private readonly IExitPointEventsRaiser eventBus;
         private readonly IUpdatableTimer levelTimer;
         private readonly IAcceleratingTimer qteTimer;
 
         [Inject]
-        public LevelExitPointsTracker(
+        public LevelExitPointsBinder(
             IExitPointEventsRaiser eventBus,
             IUpdatableTimer levelTimer, 
             IAcceleratingTimer qteTimer
