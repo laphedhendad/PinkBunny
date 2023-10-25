@@ -5,7 +5,7 @@ namespace Laphed.QTEBasedLevel
     public interface IPlayerInput
     {
         event Action OnClick;
-        void Enable();
-        void Disable();
+        void SwitchToGameMode();
+        void SwitchToUIMode();
     }
 }

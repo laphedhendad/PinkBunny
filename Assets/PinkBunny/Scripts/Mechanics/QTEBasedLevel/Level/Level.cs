@@ -1,7 +1,6 @@
 ﻿using System;
-using Laphed.LevelEventBus;
+using Laphed.EventBus;
 using Laphed.Timer;
-using UnityEngine;
 using Zenject;
 
 namespace Laphed.QTEBasedLevel
@@ -9,7 +8,7 @@ namespace Laphed.QTEBasedLevel
     public class Level: ILevel, IBuildableLevel, IDisposable
     {
         private readonly IQteQueue qteQueue;
-        private readonly IExitPointEventsRaiser eventBus;
+        private readonly IEventRaiser eventBus;
         private readonly IUpdatableTimer levelTimer;
         private readonly IAcceleratingTimer qteTimer;
 
@@ -18,7 +17,7 @@ namespace Laphed.QTEBasedLevel
             IUpdatableTimer levelTimer,
             IAcceleratingTimer qteTimer,
             IQteQueue qteQueue,
-            IExitPointEventsRaiser eventBus
+            IEventRaiser eventBus
         )
         {
             this.levelTimer = levelTimer;
@@ -31,6 +30,7 @@ namespace Laphed.QTEBasedLevel
         
         public void Start()
         {
+            eventBus.Raise(new LevelStarted());
             levelTimer.Start();
             ToNextQte();
         }
@@ -53,14 +53,12 @@ namespace Laphed.QTEBasedLevel
 
         private void Fail()
         {
-            Debug.Log("Fail");
-            eventBus.RaiseLevelFailedEvent();
+            eventBus.Raise(new LevelFailed());
         }
 
         private void Complete()
         {
-            Debug.Log("Complete");
-            eventBus.RaiseLevelCompletedEvent();
+            eventBus.Raise(new LevelCompleted());
         }
 
         private void SubscribeOnTimersEvents()

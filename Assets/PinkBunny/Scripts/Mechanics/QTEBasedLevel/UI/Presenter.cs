@@ -2,7 +2,7 @@
 {
     public abstract class Presenter<TModelData, TViewData>
     {
-        protected IView<TViewData> view;
+        protected readonly IView<TViewData> view;
 
         protected Presenter(IView<TViewData> view)
         {
@@ -14,7 +14,7 @@
     
     public abstract class Presenter<T>
     {
-        protected IView<T> view;
+        protected readonly IView<T> view;
 
         protected Presenter(IView<T> view)
         {

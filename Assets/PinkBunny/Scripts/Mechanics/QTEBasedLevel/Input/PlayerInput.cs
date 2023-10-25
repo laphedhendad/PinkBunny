@@ -18,15 +18,18 @@ namespace Laphed.QTEBasedLevel
         private void InitializeInputSystem()
         {
             gameInput = new GameInput();
+            gameInput.Enable();
+            gameInput.UI.Enable();
+            gameInput.Gameplay.Disable();
         }
 
-        public void Enable()
+        public void SwitchToGameMode()
         {
             gameInput.UI.Disable();
             gameInput.Gameplay.Enable();
         }
 
-        public void Disable()
+        public void SwitchToUIMode()
         {
             gameInput.Gameplay.Disable();
             gameInput.UI.Enable();

@@ -1,5 +1,4 @@
-﻿using Laphed.LevelEventBus;
-using Laphed.QTEBasedLevel.UI;
+﻿using Laphed.QTEBasedLevel.UI;
 using Laphed.Timer;
 using UnityEngine;
 using Zenject;
@@ -12,7 +11,6 @@ namespace Laphed.QTEBasedLevel
         
         public override void InstallBindings()
         {
-            BindInput();
             BindEventBus();
             BindTimers();
             BindLevel();
@@ -20,14 +18,11 @@ namespace Laphed.QTEBasedLevel
 
         public override void Start()
         {
-            RegisterGlobalEvents();
             BindUI();
             BuildCurrentLevel();
         }
 
-        private void BindInput() => Container.Bind<IPlayerInput>().To<PlayerInput>().AsSingle();
-        
-        private void BindEventBus() => Container.BindInterfacesTo<EventBus>().AsSingle();
+        private void BindEventBus() => Container.BindInterfacesTo<EventBus.EventBus>().AsSingle();
 
         private void BindTimers()
         {
@@ -40,16 +35,8 @@ namespace Laphed.QTEBasedLevel
         private void BindLevel()
         {
             Container.Bind<IQteQueue>().To<QteQueue>().AsSingle();
-            Container.Bind<LevelExitPointsBinder>().AsSingle();
             Container.BindInterfacesAndSelfTo<Level>().AsSingle();
             Container.BindInterfacesTo<LevelBuilder>().AsSingle();
-        }
-
-        private void RegisterGlobalEvents()
-        {
-            Container.Resolve<LevelExitPointsBinder>();
-            var eventBus = Container.Resolve<IExitPointEventsRegistrar>();
-            var level = Container.Resolve<Level>();
         }
 
         private void BindUI()
@@ -64,9 +51,17 @@ namespace Laphed.QTEBasedLevel
         
         private void BuildCurrentLevel()
         {
-            IBuildableLevel level = Container.Resolve<IBuildableLevel>();
+            IBuildableLevel buildableLevel = Container.Resolve<IBuildableLevel>();
             ILevelBuilder levelBuilder = Container.Resolve<ILevelBuilder>();
-            levelBuilder.Build(level, levelConfig);
+            levelBuilder.Build(buildableLevel, levelConfig);
+            ILevel level = Container.Resolve<ILevel>();
+            Container.Resolve<IPlayerInput>().OnClick += level.ToNextQte;
+        }
+
+        private void OnDisable()
+        {
+            ILevel level = Container.Resolve<ILevel>();
+            Container.Resolve<IPlayerInput>().OnClick -= level.ToNextQte;
         }
     }
 }

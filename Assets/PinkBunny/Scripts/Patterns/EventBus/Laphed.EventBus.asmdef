@@ -1,6 +1,6 @@
 {
-    "name": "Laphed.LevelFailedCompletedEventBus",
-    "rootNamespace": "Laphed.LevelEventBus",
+    "name": "Laphed.EventBus",
+    "rootNamespace": "Laphed.EventBus",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
