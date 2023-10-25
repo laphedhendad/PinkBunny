@@ -11,7 +11,6 @@ namespace Laphed.QTEBasedLevel
         
         public override void InstallBindings()
         {
-            BindEventBus();
             BindTimers();
             BindLevel();
         }
@@ -21,8 +20,6 @@ namespace Laphed.QTEBasedLevel
             BindUI();
             BuildCurrentLevel();
         }
-
-        private void BindEventBus() => Container.BindInterfacesTo<EventBus.EventBus>().AsSingle();
 
         private void BindTimers()
         {

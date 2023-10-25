@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Laphed.EventBus
 {
-    public class EventBus
+    public class EventBus: IEventRaiser, IEventReceiverRegister
     {
         private readonly Dictionary<Type, List<WeakReference<IBaseEventReceiver>>> receivers;
         private readonly Dictionary<string, WeakReference<IBaseEventReceiver>> receiverHashToReference;

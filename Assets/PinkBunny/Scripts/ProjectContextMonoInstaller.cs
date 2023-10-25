@@ -7,7 +7,7 @@ using Zenject;
 public class ProjectContextMonoInstaller : MonoInstaller
 {
     [SerializeField] private CoroutineProvider coroutineProvider;
-    private InputSchemeSwitcher inputSchemeSwitcher;
+    
     public override void InstallBindings()
     {
         BindEventBus();
@@ -17,7 +17,7 @@ public class ProjectContextMonoInstaller : MonoInstaller
 
     public override void Start()
     {
-        inputSchemeSwitcher = Container.Resolve<InputSchemeSwitcher>();
+        Container.Resolve<InputSchemeSwitcher>();
     }
 
     private void BindUtils()
