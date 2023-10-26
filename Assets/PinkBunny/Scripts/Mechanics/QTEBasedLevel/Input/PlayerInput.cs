@@ -1,16 +1,21 @@
 ﻿using System;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
+using Zenject;
 
 namespace Laphed.QTEBasedLevel
 {
     public class PlayerInput: IPlayerInput, IDisposable
     {
         public event Action OnClick;
+        private readonly InputSystemUIInputModule uiInputModule;
         private GameInput gameInput;
         private DefaultInputActions defaultInputActions;
 
-        public PlayerInput()
+        [Inject]
+        public PlayerInput(InputSystemUIInputModule uiInputModule)
         {
+            this.uiInputModule = uiInputModule;
             InitializeInputSystem();
             SubscribeOnInputEvents();
         }
@@ -19,20 +24,19 @@ namespace Laphed.QTEBasedLevel
         {
             gameInput = new GameInput();
             gameInput.Enable();
-            gameInput.UI.Enable();
             gameInput.Gameplay.Disable();
         }
 
         public void SwitchToGameMode()
         {
-            gameInput.UI.Disable();
+            uiInputModule.actionsAsset.Disable();
             gameInput.Gameplay.Enable();
         }
 
         public void SwitchToUIMode()
         {
             gameInput.Gameplay.Disable();
-            gameInput.UI.Enable();
+            uiInputModule.actionsAsset.Enable();
         }
 
         private void SubscribeOnInputEvents()
