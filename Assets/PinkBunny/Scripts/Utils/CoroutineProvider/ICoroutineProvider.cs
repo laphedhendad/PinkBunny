@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Laphed.CoroutineProvider
+namespace Laphed.CoroutinesProvider
 {
     public interface ICoroutineProvider
     {

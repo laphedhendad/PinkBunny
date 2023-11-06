@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Laphed.EventBus
+namespace Laphed.InterfacesEventBus
 {
     public class EventBus: IEventRaiser, IEventReceiverRegister
     {

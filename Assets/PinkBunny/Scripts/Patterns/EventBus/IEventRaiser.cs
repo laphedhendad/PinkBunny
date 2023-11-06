@@ -1,4 +1,4 @@
-﻿namespace Laphed.EventBus
+﻿namespace Laphed.InterfacesEventBus
 {
     public interface IEventRaiser
     {

@@ -1,4 +1,4 @@
-﻿using Laphed.EventBus;
+﻿using Laphed.InterfacesEventBus;
 
 namespace Laphed.QTEBasedLevel
 {

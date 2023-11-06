@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Laphed.EventBus
+namespace Laphed.InterfacesEventBus
 {
     public record UniqueId
     {

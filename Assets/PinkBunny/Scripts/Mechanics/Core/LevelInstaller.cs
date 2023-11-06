@@ -1,6 +1,7 @@
 ﻿using Laphed.QTEBasedLevel;
 using Laphed.Timer;
 using UnityEngine;
+using UnityEngine.Timeline;
 using Zenject;
 
 namespace Laphed.PinkBunny
@@ -8,6 +9,7 @@ namespace Laphed.PinkBunny
     public class LevelInstaller: MonoInstaller
     {
         [SerializeField] private LevelConfig levelConfig;
+        [SerializeField] private TimelineAsset screamerCutscene;
 
         public override void InstallBindings()
         {
@@ -33,6 +35,11 @@ namespace Laphed.PinkBunny
             Container.Bind<IQteQueue>().To<QteQueue>().AsSingle();
             Container.BindInterfacesAndSelfTo<Level>().AsSingle();
             Container.BindInterfacesTo<LevelBuilder>().AsSingle();
+        }
+
+        private void BindCutscenes()
+        {
+            Container.Bind<TimelineAsset>().WithId("fail_screamer").FromInstance(screamerCutscene).AsSingle();
         }
 
         private void BuildCurrentLevel()

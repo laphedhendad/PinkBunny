@@ -1,5 +1,5 @@
 ﻿using System;
-using Laphed.EventBus;
+using Laphed.InterfacesEventBus;
 using Laphed.Timer;
 using Zenject;
 
