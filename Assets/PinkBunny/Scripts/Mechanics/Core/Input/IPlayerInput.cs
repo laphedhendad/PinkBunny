@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Laphed.QTEBasedLevel
+namespace Laphed.PinkBunny
 {
     public interface IPlayerInput
     {

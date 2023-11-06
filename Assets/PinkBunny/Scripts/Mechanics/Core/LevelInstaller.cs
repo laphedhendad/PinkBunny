@@ -1,14 +1,14 @@
-﻿using Laphed.QTEBasedLevel.UI;
+﻿using Laphed.QTEBasedLevel;
 using Laphed.Timer;
 using UnityEngine;
 using Zenject;
 
-namespace Laphed.QTEBasedLevel
+namespace Laphed.PinkBunny
 {
     public class LevelInstaller: MonoInstaller
     {
         [SerializeField] private LevelConfig levelConfig;
-        
+
         public override void InstallBindings()
         {
             BindTimers();
@@ -17,7 +17,6 @@ namespace Laphed.QTEBasedLevel
 
         public override void Start()
         {
-            BindUI();
             BuildCurrentLevel();
         }
 
@@ -36,16 +35,6 @@ namespace Laphed.QTEBasedLevel
             Container.BindInterfacesTo<LevelBuilder>().AsSingle();
         }
 
-        private void BindUI()
-        {
-            UIBinder uiBinder = Container.Resolve<UIBinder>();
-            ITimer levelTimer = Container.Resolve<IUpdatableTimer>();
-            ITimer qteTimer = Container.Resolve<IAcceleratingTimer>();
-            ILevel level = Container.Resolve<ILevel>();
-            
-            uiBinder.Bind(levelTimer, qteTimer, level);
-        }
-        
         private void BuildCurrentLevel()
         {
             IBuildableLevel buildableLevel = Container.Resolve<IBuildableLevel>();

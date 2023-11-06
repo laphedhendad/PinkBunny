@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Laphed.QTEBasedLevel.UI
+namespace Laphed.PinkBunny.UI
 {
     public class TimerView: MonoBehaviour, IView<string>
     {

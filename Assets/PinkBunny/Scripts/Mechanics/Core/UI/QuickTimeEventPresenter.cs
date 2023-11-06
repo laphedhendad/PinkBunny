@@ -1,7 +1,7 @@
 ﻿using System;
 using Laphed.Timer;
 
-namespace Laphed.QTEBasedLevel.UI
+namespace Laphed.PinkBunny.UI
 {
     public class QuickTimeEventPresenter: Presenter<float>, IDisposable
     {

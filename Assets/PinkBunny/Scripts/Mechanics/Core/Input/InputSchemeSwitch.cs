@@ -1,10 +1,11 @@
 ﻿using System;
 using Laphed.EventBus;
+using Laphed.QTEBasedLevel;
 using Zenject;
 
-namespace Laphed.QTEBasedLevel
+namespace Laphed.PinkBunny
 {
-    public class InputSchemeSwitcher: IEventReceiver<LevelStarted>, IEventReceiver<LevelCompleted>, IEventReceiver<LevelFailed>, IDisposable
+    public class InputSchemeSwitch: IEventReceiver<LevelStarted>, IEventReceiver<LevelCompleted>, IEventReceiver<LevelFailed>, IDisposable
     {
         public UniqueId Id { get; } = new();
         
@@ -12,7 +13,7 @@ namespace Laphed.QTEBasedLevel
         private readonly IEventReceiverRegister eventBus;
 
         [Inject]
-        public InputSchemeSwitcher(IPlayerInput playerInput, IEventReceiverRegister eventBus)
+        public InputSchemeSwitch(IPlayerInput playerInput, IEventReceiverRegister eventBus)
         {
             this.playerInput = playerInput;
             this.eventBus = eventBus;

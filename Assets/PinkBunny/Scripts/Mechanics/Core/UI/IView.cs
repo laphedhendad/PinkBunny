@@ -1,4 +1,4 @@
-﻿namespace Laphed.QTEBasedLevel.UI
+﻿namespace Laphed.PinkBunny.UI
 {
     public interface IView<T>
     {

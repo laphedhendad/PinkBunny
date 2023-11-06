@@ -1,7 +1,7 @@
 ﻿using System;
 using Laphed.Timer;
 
-namespace Laphed.QTEBasedLevel.UI
+namespace Laphed.PinkBunny.UI
 {
     public class TimerPresenter: Presenter<float, string>, IDisposable
     {

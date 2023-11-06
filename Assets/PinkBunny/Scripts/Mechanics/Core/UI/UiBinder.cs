@@ -1,19 +1,23 @@
-﻿using Laphed.Timer;
+﻿using Laphed.QTEBasedLevel;
+using Laphed.Timer;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Laphed.QTEBasedLevel.UI
+namespace Laphed.PinkBunny.UI
 {
-    public class UIBinder: MonoBehaviour
+    public class UiBinder: MonoBehaviour
     {
         [SerializeField] private FilledImageIndicator filledImageIndicator;
         [SerializeField] private TimerView timerView;
         [SerializeField] private Button startButton;
+
+        private TimerPresenter timerPresenter;
+        private QuickTimeEventPresenter qtePresenter;
         
         public void Bind(ITimer levelTimer, ITimer qteTimer, ILevel level)
         {
-            TimerPresenter timerPresenter = new TimerPresenter(timerView, levelTimer);
-            QuickTimeEventPresenter qtePresenter = new QuickTimeEventPresenter(filledImageIndicator, qteTimer);
+            timerPresenter = new TimerPresenter(timerView, levelTimer);
+            qtePresenter = new QuickTimeEventPresenter(filledImageIndicator, qteTimer);
             startButton.onClick.AddListener(level.Start);
         }
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Laphed.QTEBasedLevel.UI
+namespace Laphed.PinkBunny.UI
 {
     public class FilledImageIndicator: MonoBehaviour, IView<float>
     {

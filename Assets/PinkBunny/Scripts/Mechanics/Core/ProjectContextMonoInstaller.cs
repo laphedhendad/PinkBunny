@@ -1,15 +1,15 @@
 using Laphed.CoroutineProvider;
-using Laphed.EventBus;
-using Laphed.QTEBasedLevel;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
 using Zenject;
+using Laphed.EventBus;
+using Laphed.PinkBunny;
 
 public class ProjectContextMonoInstaller : MonoInstaller
 {
     [SerializeField] private CoroutineProvider coroutineProvider;
     [SerializeField] private InputSystemUIInputModule uiInputModule;
-    
+
     public override void InstallBindings()
     {
         BindEventBus();
@@ -17,7 +17,7 @@ public class ProjectContextMonoInstaller : MonoInstaller
         BindInput();
     }
 
-    public override void Start() => Container.Resolve<InputSchemeSwitcher>();
+    public override void Start() => Container.Resolve<InputSchemeSwitch>();
 
     private void BindUtils() => Container.Bind<ICoroutineProvider>().FromInstance(coroutineProvider).AsSingle();
 
@@ -25,8 +25,8 @@ public class ProjectContextMonoInstaller : MonoInstaller
     {
         Container.Bind<InputSystemUIInputModule>().FromInstance(uiInputModule).AsSingle();
         Container.Bind<IPlayerInput>().To<PlayerInput>().AsSingle();
-        Container.Bind<InputSchemeSwitcher>().AsSingle();
+        Container.Bind<InputSchemeSwitch>().AsSingle();
     }
-    
+
     private void BindEventBus() => Container.BindInterfacesTo<EventBus>().AsSingle();
 }

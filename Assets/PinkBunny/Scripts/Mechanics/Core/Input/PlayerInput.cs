@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using Zenject;
 
-namespace Laphed.QTEBasedLevel
+namespace Laphed.PinkBunny
 {
     public class PlayerInput: IPlayerInput, IDisposable
     {
