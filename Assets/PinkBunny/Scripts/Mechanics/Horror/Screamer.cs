@@ -24,7 +24,7 @@ namespace Laphed.Horror
             await UniTask.Delay((int)(timelineAsset.duration * 1000));
         }
 
-        public class Factory : PlaceholderFactory<TimelineAsset, IScreamer>
+        public class Factory : PlaceholderFactory<TimelineAsset, Screamer>
         {
         }
     }

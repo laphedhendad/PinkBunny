@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem.UI;
 using Zenject;
 using Laphed.InterfacesEventBus;
-using Laphed.PinkBunny;
 
 namespace Laphed.PinkBunny
 {

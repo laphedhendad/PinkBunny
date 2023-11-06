@@ -1,4 +1,3 @@
-using Laphed.QTEBasedLevel;
 using Laphed.Timer;
 using Zenject;
 
@@ -20,9 +19,9 @@ namespace Laphed.PinkBunny.UI
             UiBinder uiBinder = Container.Resolve<UiBinder>();
             ITimer levelTimer = Container.Resolve<IUpdatableTimer>();
             ITimer qteTimer = Container.Resolve<IAcceleratingTimer>();
-            ILevel level = Container.Resolve<ILevel>();
+            ILevelEntryPoint levelEntryPoint = Container.Resolve<ILevelEntryPoint>();
 
-            uiBinder.Bind(levelTimer, qteTimer, level);
+            uiBinder.Bind(levelTimer, qteTimer, levelEntryPoint);
         }
     }
 }

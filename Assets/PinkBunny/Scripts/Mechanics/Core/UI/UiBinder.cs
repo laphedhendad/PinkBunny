@@ -14,11 +14,11 @@ namespace Laphed.PinkBunny.UI
         private TimerPresenter timerPresenter;
         private QuickTimeEventPresenter qtePresenter;
         
-        public void Bind(ITimer levelTimer, ITimer qteTimer, ILevel level)
+        public void Bind(ITimer levelTimer, ITimer qteTimer, ILevelEntryPoint levelEntryPoint)
         {
             timerPresenter = new TimerPresenter(timerView, levelTimer);
             qtePresenter = new QuickTimeEventPresenter(filledImageIndicator, qteTimer);
-            startButton.onClick.AddListener(level.Start);
+            startButton.onClick.AddListener(levelEntryPoint.StartLevel);
         }
 
         private void OnDestroy()

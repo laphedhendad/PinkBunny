@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Laphed.QTEBasedLevel
 {
-    public class Level: ILevel, IBuildableLevel, IDisposable
+    public class Level: IBuildableLevel, IDisposable
     {
         private readonly IQteQueue qteQueue;
         private readonly IEventRaiser eventBus;

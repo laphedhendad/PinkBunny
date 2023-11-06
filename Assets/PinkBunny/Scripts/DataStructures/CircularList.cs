@@ -2,6 +2,7 @@
 {
     public class CircularList<TData>
     {
+        public TData Current => current.Data;
         private Node current;
         private Node head;
         private Node tail;
@@ -15,6 +16,7 @@
                 head = newNode;
                 head.Next = head;
                 tail = head;
+                current = head;
                 return;
             }
 

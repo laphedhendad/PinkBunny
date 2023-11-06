@@ -2,7 +2,7 @@
 
 namespace Laphed.PinkBunny.UI
 {
-    public interface IUIModeSwitch
+    public interface IUiModeSwitch
     {
         UniTask Switch();
     }
