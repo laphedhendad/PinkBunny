@@ -1,4 +1,4 @@
-﻿using Laphed.CoroutineProvider;
+﻿using Laphed.CoroutinesProvider;
 using Zenject;
 
 namespace Laphed.Timer

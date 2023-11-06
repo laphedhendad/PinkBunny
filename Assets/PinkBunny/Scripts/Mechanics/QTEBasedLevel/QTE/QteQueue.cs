@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Laphed.Timer;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Laphed.QTEBasedLevel

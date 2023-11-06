@@ -1,4 +1,4 @@
-﻿using Laphed.CoroutineProvider;
+﻿using Laphed.CoroutinesProvider;
 using Laphed.ExceptionsHandler;
 using UnityEngine;
 
