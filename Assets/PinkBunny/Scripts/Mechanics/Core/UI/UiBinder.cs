@@ -16,8 +16,10 @@ namespace Laphed.PinkBunny.UI
         
         public void Bind(ITimer levelTimer, ITimer qteTimer, ILevelEntryPoint levelEntryPoint)
         {
-            timerPresenter = new TimerPresenter(timerView, levelTimer);
+            timerPresenter = new TimerPresenter(timerView);
+            timerPresenter.SubscribeModel(levelTimer.TimeLeft);
             qtePresenter = new QuickTimeEventPresenter(filledImageIndicator, qteTimer);
+            qtePresenter.SubscribeModel(qteTimer.TimeLeft);
             startButton.onClick.AddListener(levelEntryPoint.StartLevel);
         }
 

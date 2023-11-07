@@ -1,4 +1,5 @@
 ﻿using System;
+using Laphed.Rx;
 
 namespace Laphed.Timer
 {
@@ -7,7 +8,7 @@ namespace Laphed.Timer
         float Duration { get; }
         void Start();
         event Action OnTimerEnd;
-        event Action<float> OnTicked;
+        ReactiveProperty<float> TimeLeft { get; }
         void Stop();
         void Continue();
     }

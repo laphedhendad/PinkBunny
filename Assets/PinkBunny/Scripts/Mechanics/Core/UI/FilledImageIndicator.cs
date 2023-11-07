@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Laphed.MVP;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Laphed.PinkBunny.UI
@@ -8,6 +10,7 @@ namespace Laphed.PinkBunny.UI
         [SerializeField] private Image image;
         [SerializeField] private Color startColor;
         [SerializeField] private Color endColor;
+        public event Action OnDispose;
 
         private Color GetColorByValue(float value)
         {
@@ -18,6 +21,11 @@ namespace Laphed.PinkBunny.UI
         {
             image.fillAmount = value;
             image.color = GetColorByValue(value);
+        }
+
+        private void OnDestroy()
+        {
+            OnDispose?.Invoke();
         }
     }
 }

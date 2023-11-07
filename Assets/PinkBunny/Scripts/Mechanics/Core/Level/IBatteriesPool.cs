@@ -1,9 +1,11 @@
-﻿namespace Laphed.PinkBunny
+﻿using Laphed.Rx;
+
+namespace Laphed.PinkBunny
 {
     public interface IBatteriesPool
     {
-        int Counter { get; }
-        void UseBattery();
+        ReactiveProperty<int> Counter { get; }
+        bool TryUseBattery();
         void SetBatteriesAmount(int amount);
     }
 }
