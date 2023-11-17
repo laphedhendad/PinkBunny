@@ -5,14 +5,15 @@ using UnityEngine;
 
 namespace Laphed.PinkBunny.UI
 {
-    public class TimerView: MonoBehaviour, IView<string>
+    public class BatteriesView: MonoBehaviour, IView<int>
     {
-        [SerializeField] private TMP_Text timerText;
+        [SerializeField] private TMP_Text counterText;
+        
         public event Action OnDispose;
-
-        public void UpdateView(string value)
+        
+        public void UpdateView(int value)
         {
-            timerText.text = value;
+            counterText.text = value.ToString();
         }
 
         private void OnDestroy()

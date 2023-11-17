@@ -2,6 +2,7 @@
 using System.Collections;
 using Laphed.CoroutinesProvider;
 using Laphed.ExceptionsHandler;
+using Laphed.Rx;
 using UnityEngine;
 
 namespace Laphed.Timer
@@ -9,9 +10,9 @@ namespace Laphed.Timer
     public class Timer: ITimer
     {
         public event Action OnTimerEnd;
-        public event Action<float> OnTicked;
-        
-        protected float currentTime;
+        public ReactiveProperty<float> TimeLeft { get; } = new();
+
+        protected float realTime;
         public float Duration { get; protected set; }
 
         private Coroutine timerCoroutine;
@@ -26,7 +27,8 @@ namespace Laphed.Timer
         {
             if(timerCoroutine != null) coroutineProvider.StopCoroutine(timerCoroutine);
             
-            currentTime = Duration;
+            realTime = Duration;
+            TimeLeft.Value = realTime;
             timerCoroutine = coroutineProvider.StartCoroutine(RealTimerCoroutine());
         }
         
@@ -53,25 +55,20 @@ namespace Laphed.Timer
 
         protected virtual void Tick()
         {
-            OnTicked?.Invoke(currentTime);
+            TimeLeft.Value = realTime;
         }
 
         private IEnumerator RealTimerCoroutine()
         {
-            while (currentTime > 0)
+            while (realTime > 0)
             {
-                currentTime -= Time.deltaTime;
+                realTime -= Time.deltaTime;
                 Tick();
                 
                 yield return new WaitForEndOfFrame();
             }
             
             End();
-        }
-
-        protected void InvokeOnTicked(float value)
-        {
-            OnTicked?.Invoke(value);
         }
     }
 }

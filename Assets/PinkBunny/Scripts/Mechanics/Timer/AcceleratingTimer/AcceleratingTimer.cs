@@ -39,7 +39,7 @@ namespace Laphed.Timer
 
         protected override void Tick()
         {
-            InvokeOnTicked(GetCurrentValue(currentTime));
+            TimeLeft.Value = GetCurrentValue(realTime);
         }
 
         private float GetCurrentValue(float realTime)

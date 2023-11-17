@@ -1,37 +1,18 @@
 ﻿using System;
-using Laphed.Timer;
+using Laphed.MVP;
 
 namespace Laphed.PinkBunny.UI
 {
-    public class TimerPresenter: Presenter<float, string>, IDisposable
+    public class TimerPresenter: Presenter<float, string>
     {
-        private readonly ITimer timer;
-
-        public TimerPresenter(IView<string> view, ITimer timer) : base(view)
+        public TimerPresenter(IView<string> view) : base(view)
         {
-            this.timer = timer;
-            SubscribeOnTimerTicked();
         }
 
-        private void SubscribeOnTimerTicked()
-        {
-            timer.OnTicked += UpdateView;
-        }
-
-        private void UnsubscribeOnTimerTicked()
-        {
-            timer.OnTicked -= UpdateView;
-        }
-        
         protected override void UpdateView(float value)
         {
             TimeSpan time = TimeSpan.FromSeconds(value);
             view.UpdateView(time.ToString(@"mm\:ss"));
-        }
-
-        public void Dispose()
-        {
-            UnsubscribeOnTimerTicked();
         }
     }
 }
