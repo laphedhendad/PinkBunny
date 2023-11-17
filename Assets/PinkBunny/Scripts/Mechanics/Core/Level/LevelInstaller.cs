@@ -41,6 +41,7 @@ namespace Laphed.PinkBunny
             Container.BindInterfacesTo<LevelBuilder>().AsSingle();
             Container.Bind<LevelConfig>().FromInstance(levelConfig);
             Container.Bind<ILevelEntryPoint>().To<LevelEntryPoint>().AsSingle();
+            Container.BindInterfacesTo<BatteriesPool>().AsSingle();
         }
 
         private void BindCutscenes()
@@ -57,8 +58,8 @@ namespace Laphed.PinkBunny
 
         private void BindInputToLevel()
         {
-            ILevel level = Container.Resolve<ILevel>();
-            Container.Resolve<IPlayerInput>().OnClick += level.ToNextQte;
+            IBatteriesPool batteriesPool = Container.Resolve<IBatteriesPool>();
+            Container.Resolve<IPlayerInput>().OnClick += batteriesPool.TryUseBattery;
         }
         
         private void ResolveLevelEventsHandlers()

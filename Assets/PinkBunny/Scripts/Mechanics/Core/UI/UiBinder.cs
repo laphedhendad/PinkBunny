@@ -1,5 +1,4 @@
-﻿using Laphed.QTEBasedLevel;
-using Laphed.Timer;
+﻿using Laphed.Timer;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,22 +9,28 @@ namespace Laphed.PinkBunny.UI
         [SerializeField] private FilledImageIndicator filledImageIndicator;
         [SerializeField] private TimerView timerView;
         [SerializeField] private Button startButton;
+        [SerializeField] private BatteriesView batteriesView;
 
-        private TimerPresenter timerPresenter;
-        private QuickTimeEventPresenter qtePresenter;
-        
-        public void Bind(ITimer levelTimer, ITimer qteTimer, ILevelEntryPoint levelEntryPoint)
+        public void BindLevelTimer(ITimer timer)
         {
-            timerPresenter = new TimerPresenter(timerView);
-            timerPresenter.SubscribeModel(levelTimer.TimeLeft);
-            qtePresenter = new QuickTimeEventPresenter(filledImageIndicator, qteTimer);
-            qtePresenter.SubscribeModel(qteTimer.TimeLeft);
-            startButton.onClick.AddListener(levelEntryPoint.StartLevel);
+            TimerPresenter timerPresenter = new TimerPresenter(timerView);
+            timerPresenter.SubscribeModel(timer.TimeLeft);
         }
 
-        private void OnDestroy()
+        public void BindQteTimer(ITimer timer)
         {
-            startButton.onClick.RemoveAllListeners();
+            QuickTimeEventPresenter qtePresenter = new QuickTimeEventPresenter(filledImageIndicator, timer);
+            qtePresenter.SubscribeModel(timer.TimeLeft);
         }
+
+        public void BindStartButton(ILevelEntryPoint levelEntryPoint) => startButton.onClick.AddListener(levelEntryPoint.StartLevel);
+
+        public void BindBatteries(IBatteriesPool batteriesPool)
+        {
+            BatteriesPresenter batteriesPresenter = new BatteriesPresenter(batteriesView);
+            batteriesPresenter.SubscribeModel(batteriesPool.Counter);
+        }
+
+        private void OnDestroy() => startButton.onClick.RemoveAllListeners();
     }
 }

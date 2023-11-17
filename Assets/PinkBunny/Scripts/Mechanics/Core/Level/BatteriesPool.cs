@@ -6,7 +6,7 @@ namespace Laphed.PinkBunny
 {
     public class BatteriesPool: IBatteriesPool
     {
-        public ReactiveProperty<int> Counter { get; private set; }
+        public ReactiveProperty<int> Counter { get; } = new();
         private readonly ILevel level;
 
         [Inject]
@@ -15,13 +15,12 @@ namespace Laphed.PinkBunny
             this.level = level;
         }
         
-        public bool TryUseBattery()
+        public void TryUseBattery()
         {
-            if (Counter.Value == 0) return false;
+            if (Counter.Value == 0) return;
             
             level.ToNextQte();
             Counter.Value--;
-            return true;
         }
 
         public void SetBatteriesAmount(int amount)

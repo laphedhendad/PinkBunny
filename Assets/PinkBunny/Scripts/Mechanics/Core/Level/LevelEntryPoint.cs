@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Linq;
+using Cysharp.Threading.Tasks;
 using Laphed.PinkBunny.UI;
 using Laphed.QTEBasedLevel;
 using Zenject;
@@ -11,24 +12,30 @@ namespace Laphed.PinkBunny
         private readonly IBuildableLevel level;
         private readonly LevelConfig levelConfig;
         private readonly ILevelBuilder levelBuilder;
+        private readonly IBatteriesPool batteriesPool;
 
         [Inject]
-        public LevelEntryPoint(IUiModeSwitch uiModeSwitch, IBuildableLevel level, LevelConfig levelConfig, ILevelBuilder levelBuilder)
+        public LevelEntryPoint(IUiModeSwitch uiModeSwitch, IBuildableLevel level, LevelConfig levelConfig, ILevelBuilder levelBuilder, IBatteriesPool batteriesPool)
         {
             this.uiModeSwitch = uiModeSwitch;
             this.level = level;
             this.levelConfig = levelConfig;
             this.levelBuilder = levelBuilder;
+            this.batteriesPool = batteriesPool;
         }
         
         public async void StartLevel()
         {
-            UniTask buildLevelTask = UniTask.RunOnThreadPool(BuildCurrentLevel);
+            UniTask buildLevelTask = BuildCurrentLevel();
             UniTask switchUiTask = uiModeSwitch.Switch();
             await UniTask.WhenAll(buildLevelTask, switchUiTask);
             level.Start();
         }
         
-        private void BuildCurrentLevel() => levelBuilder.Build(level, levelConfig);
+        private async UniTask BuildCurrentLevel()
+        {
+            await UniTask.RunOnThreadPool(()=>levelBuilder.Build(level, levelConfig));
+            batteriesPool.SetBatteriesAmount(levelConfig.GetTimerSettings().Count());
+        }
     }
 }

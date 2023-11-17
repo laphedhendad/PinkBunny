@@ -1,10 +1,7 @@
-﻿using System;
-
-namespace Laphed.Rx
+﻿namespace Laphed.Rx
 {
-    public interface IReactiveProperty<T>
+    public interface IReactiveProperty<T>: INotifyPropertyChanged
     {
         T Value { get; }
-        event Action OnChanged;
     }
 }
