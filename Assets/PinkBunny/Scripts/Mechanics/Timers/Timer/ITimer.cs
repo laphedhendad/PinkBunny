@@ -1,11 +1,11 @@
 ﻿using System;
 using Laphed.Rx;
 
-namespace Laphed.Timer
+namespace Laphed.Timers
 {
     public interface ITimer
     {
-        float Duration { get; }
+        float Duration { get; set; }
         void Start();
         event Action OnTimerEnd;
         ReactiveProperty<float> TimeLeft { get; }

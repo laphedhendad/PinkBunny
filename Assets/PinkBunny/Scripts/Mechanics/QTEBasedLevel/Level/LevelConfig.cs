@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Laphed.AnimationCurveInspectorExtension;
-using Laphed.Timer;
+using Laphed.Timers;
 using UnityEngine;
 
 namespace Laphed.QTEBasedLevel

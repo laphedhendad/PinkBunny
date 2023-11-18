@@ -1,5 +1,5 @@
 ﻿using Laphed.MVP;
-using Laphed.Timer;
+using Laphed.Timers;
 
 namespace Laphed.PinkBunny.UI
 {

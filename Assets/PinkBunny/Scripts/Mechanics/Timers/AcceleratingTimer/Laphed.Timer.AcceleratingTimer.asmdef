@@ -1,11 +1,10 @@
 {
-    "name": "Laphed.Timer",
-    "rootNamespace": "Laphed.Timer",
+    "name": "Laphed.Timer.AcceleratingTimer",
+    "rootNamespace": "Laphed.Timers.AcceleratingTimer",
     "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:3ff407546b24b1b429788b09c9735532",
-        "GUID:a5e5fce344adccb418d67fcb589163dc",
-        "GUID:ce62f970e9469234d832befe192f3667"
+        "GUID:45dd841a7e2c7bc42b2d3e5c0869e3ba",
+        "GUID:ce62f970e9469234d832befe192f3667",
+        "GUID:a5e5fce344adccb418d67fcb589163dc"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

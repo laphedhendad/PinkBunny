@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Laphed.Timer;
+using Laphed.Timers;
 
 namespace Laphed.QTEBasedLevel
 {

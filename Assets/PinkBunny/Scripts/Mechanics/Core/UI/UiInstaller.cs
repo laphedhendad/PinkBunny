@@ -1,4 +1,5 @@
-using Laphed.Timer;
+using Laphed.QTEBasedLevel;
+using Laphed.Timers;
 using Zenject;
 
 namespace Laphed.PinkBunny.UI
@@ -17,8 +18,8 @@ namespace Laphed.PinkBunny.UI
         private void BindUi()
         {
             UiBinder uiBinder = Container.Resolve<UiBinder>();
-            ITimer levelTimer = Container.Resolve<IUpdatableTimer>();
-            ITimer qteTimer = Container.Resolve<IAcceleratingTimer>();
+            ITimer levelTimer = Container.ResolveId<ITimer>(TimerType.Level);
+            ITimer qteTimer = Container.ResolveId<IAcceleratingTimer>(TimerType.Qte);
             ILevelEntryPoint levelEntryPoint = Container.Resolve<ILevelEntryPoint>();
             IBatteriesPool batteriesPool = Container.Resolve<IBatteriesPool>();
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Laphed.Timer;
+using Laphed.Timers;
 using Zenject;
 
 namespace Laphed.QTEBasedLevel
@@ -10,7 +10,7 @@ namespace Laphed.QTEBasedLevel
         private readonly IAcceleratingTimer timer;
         
         [Inject]
-        public QteQueue(IAcceleratingTimer timer)
+        public QteQueue([Inject(Id = TimerType.Qte)] IAcceleratingTimer timer)
         {
             this.timer = timer;
         }

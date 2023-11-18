@@ -4,7 +4,7 @@
     {
         protected override string GetExceptionText()
         {
-            return $"{typeof(StartNotInitializedTimerException)}: Initialize timer before invoking it's Start() method.";
+            return $"{typeof(StartNotInitializedTimerException)}: Set Timer.Duration property before invoking it's Start() method.";
         }
     }
 }

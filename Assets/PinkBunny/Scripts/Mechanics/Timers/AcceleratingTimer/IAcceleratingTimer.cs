@@ -1,4 +1,4 @@
-﻿namespace Laphed.Timer
+﻿namespace Laphed.Timers
 {
     public interface IAcceleratingTimer: ITimer
     {

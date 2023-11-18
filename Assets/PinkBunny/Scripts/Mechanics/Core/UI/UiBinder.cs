@@ -1,4 +1,4 @@
-﻿using Laphed.Timer;
+﻿using Laphed.Timers;
 using UnityEngine;
 using UnityEngine.UI;
 

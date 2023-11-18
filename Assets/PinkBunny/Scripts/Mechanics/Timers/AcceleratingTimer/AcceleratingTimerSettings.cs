@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Laphed.Timer
+namespace Laphed.Timers
 {
     [Serializable]
     public struct AcceleratingTimerSettings
