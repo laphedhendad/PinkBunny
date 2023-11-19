@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Laphed.InterfacesEventBus;
-using Laphed.Timer;
+using Laphed.Timers;
 using Zenject;
 
 namespace Laphed.QTEBasedLevel
@@ -9,13 +10,11 @@ namespace Laphed.QTEBasedLevel
     {
         private readonly IQteQueue qteQueue;
         private readonly IEventRaiser eventBus;
-        private readonly IUpdatableTimer levelTimer;
-        private readonly IAcceleratingTimer qteTimer;
+        private readonly ITimer levelTimer;
 
         [Inject]
         public Level(
-            IUpdatableTimer levelTimer,
-            IAcceleratingTimer qteTimer,
+            [Inject(Id = TimerType.Level)] ITimer levelTimer,
             IQteQueue qteQueue,
             IEventRaiser eventBus
         )
@@ -23,9 +22,8 @@ namespace Laphed.QTEBasedLevel
             this.levelTimer = levelTimer;
             this.qteQueue = qteQueue;
             this.eventBus = eventBus;
-            this.qteTimer = qteTimer;
-            
-            SubscribeOnTimersEvents();
+
+            SubscribeEvents();
         }
         
         public void Start()
@@ -35,10 +33,7 @@ namespace Laphed.QTEBasedLevel
             ToNextQte();
         }
 
-        public void SetLevelTime(float time)
-        {
-            levelTimer.SetDuration(time);
-        }
+        public void SetLevelTime(float time) => levelTimer.Duration = time;
 
         public void ToNextQte()
         {
@@ -46,36 +41,38 @@ namespace Laphed.QTEBasedLevel
             qteQueue.ActivateNextQuickTimeEvent();
         }
 
-        public void SetQteQueue(QteQueueSetup qteQueueSetup)
+        public void SetQteQueue(IEnumerable<QteData> qteQueueSetup)
         {
-            qteQueue.SetTimerSettings(qteQueueSetup.timerSettings);
+            qteQueue.SetTimerSettings(qteQueueSetup);
         }
 
         private void Fail()
         {
+            levelTimer.Stop();
             eventBus.Raise(new LevelFailed());
         }
 
         private void Complete()
         {
+            qteQueue.Stop();
             eventBus.Raise(new LevelCompleted());
         }
 
-        private void SubscribeOnTimersEvents()
+        private void SubscribeEvents()
         {
             levelTimer.OnTimerEnd += Complete;
-            qteTimer.OnTimerEnd += Fail;
+            qteQueue.OnFailed += Fail;
         }
 
-        private void UnsubscribeFromTimersEvents()
+        private void UnsubscribeEvents()
         {
             levelTimer.OnTimerEnd -= Complete;
-            qteTimer.OnTimerEnd -= Fail;
+            qteQueue.OnFailed -= Fail;
         }
 
         public void Dispose()
         {
-            UnsubscribeFromTimersEvents();
+            UnsubscribeEvents();
         }
     }
 }

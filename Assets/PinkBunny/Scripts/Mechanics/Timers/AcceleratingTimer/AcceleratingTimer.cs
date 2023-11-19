@@ -1,16 +1,11 @@
-﻿using Laphed.CoroutinesProvider;
-using Laphed.ExceptionsHandler;
+﻿using Laphed.ExceptionsHandler;
 using UnityEngine;
 
-namespace Laphed.Timer
+namespace Laphed.Timers
 {
     public class AcceleratingTimer: Timer, IAcceleratingTimer
     {
         private AnimationCurve curve;
-        
-        public AcceleratingTimer(ICoroutineProvider coroutineProvider) : base(coroutineProvider)
-        {
-        }
 
         private void Initialize(AcceleratingTimerSettings settings)
         {

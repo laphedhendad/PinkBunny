@@ -1,6 +1,6 @@
 ﻿using Laphed.Horror;
 using Laphed.QTEBasedLevel;
-using Laphed.Timer;
+using Laphed.Timers;
 using UnityEngine;
 using UnityEngine.Timeline;
 using Zenject;
@@ -28,10 +28,8 @@ namespace Laphed.PinkBunny
 
         private void BindTimers()
         {
-            Container.BindIFactory<AcceleratingTimerFactory>().AsSingle();
-            Container.BindIFactory<UpdatableTimerFactory>().AsSingle();
-            Container.Bind<IAcceleratingTimer>().FromFactory<AcceleratingTimerFactory>().AsSingle();
-            Container.Bind<IUpdatableTimer>().FromFactory<UpdatableTimerFactory>().AsSingle();
+            Container.Bind<ITimer>().WithId(TimerType.Level).FromInstance(new Timer());
+            Container.Bind<ITimer>().WithId(TimerType.Qte).FromInstance(new Timer());
         }
 
         private void BindLevel()
