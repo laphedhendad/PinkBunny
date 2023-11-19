@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Laphed.InterfacesEventBus;
 using Laphed.Timers;
 using Zenject;
@@ -10,12 +11,10 @@ namespace Laphed.QTEBasedLevel
         private readonly IQteQueue qteQueue;
         private readonly IEventRaiser eventBus;
         private readonly ITimer levelTimer;
-        private readonly IAcceleratingTimer qteTimer;
 
         [Inject]
         public Level(
             [Inject(Id = TimerType.Level)] ITimer levelTimer,
-            [Inject(Id = TimerType.Qte)] IAcceleratingTimer qteTimer,
             IQteQueue qteQueue,
             IEventRaiser eventBus
         )
@@ -23,9 +22,8 @@ namespace Laphed.QTEBasedLevel
             this.levelTimer = levelTimer;
             this.qteQueue = qteQueue;
             this.eventBus = eventBus;
-            this.qteTimer = qteTimer;
-            
-            SubscribeOnTimersEvents();
+
+            SubscribeEvents();
         }
         
         public void Start()
@@ -43,9 +41,9 @@ namespace Laphed.QTEBasedLevel
             qteQueue.ActivateNextQuickTimeEvent();
         }
 
-        public void SetQteQueue(QteQueueSetup qteQueueSetup)
+        public void SetQteQueue(IEnumerable<QteData> qteQueueSetup)
         {
-            qteQueue.SetTimerSettings(qteQueueSetup.timerSettings);
+            qteQueue.SetTimerSettings(qteQueueSetup);
         }
 
         private void Fail()
@@ -56,24 +54,25 @@ namespace Laphed.QTEBasedLevel
 
         private void Complete()
         {
+            qteQueue.Stop();
             eventBus.Raise(new LevelCompleted());
         }
 
-        private void SubscribeOnTimersEvents()
+        private void SubscribeEvents()
         {
             levelTimer.OnTimerEnd += Complete;
-            qteTimer.OnTimerEnd += Fail;
+            qteQueue.OnFailed += Fail;
         }
 
-        private void UnsubscribeFromTimersEvents()
+        private void UnsubscribeEvents()
         {
             levelTimer.OnTimerEnd -= Complete;
-            qteTimer.OnTimerEnd -= Fail;
+            qteQueue.OnFailed -= Fail;
         }
 
         public void Dispose()
         {
-            UnsubscribeFromTimersEvents();
+            UnsubscribeEvents();
         }
     }
 }

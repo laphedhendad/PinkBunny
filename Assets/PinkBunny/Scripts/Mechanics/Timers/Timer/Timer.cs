@@ -18,7 +18,7 @@ namespace Laphed.Timers
             get => duration;
             set
             {
-                if (cancellationToken != null) throw new UpdateActiveTimerDurationException();
+                if (cancellationToken is { IsCancellationRequested: false }) throw new UpdateActiveTimerDurationException();
                 duration = value;
             }
         }
@@ -29,15 +29,12 @@ namespace Laphed.Timers
         {
         }
 
-        public Timer(float duration)
-        {
-            this.duration = duration;
-        }
+        public Timer(float duration) => this.duration = duration;
 
         public virtual async void Start()
         {
             Stop();
-            
+            await UniTask.Yield();
             cancellationToken = new CancellationTokenSource();
             realTime = Duration;
             TimeLeft.Value = realTime;
@@ -55,16 +52,14 @@ namespace Laphed.Timers
             }
         }
         
-        public void Stop()
-        {
-            cancellationToken?.Cancel();
-        }
+        public void Stop() => cancellationToken?.Cancel();
 
         public virtual async void Continue()
         {
             if (cancellationToken != null) throw new ContinueNotStoppedTimerException();
             
             cancellationToken = new CancellationTokenSource();
+            CancellationTokenSource previousToken = cancellationToken;
 
             try
             {
@@ -79,16 +74,9 @@ namespace Laphed.Timers
             }
         }
 
-        private void End()
-        {
-            Stop();
-            OnTimerEnd?.Invoke();
-        }
+        private void End() => OnTimerEnd?.Invoke();
 
-        protected virtual void Tick()
-        {
-            TimeLeft.Value = realTime;
-        }
+        protected virtual void Tick() => TimeLeft.Value = realTime;
 
         private async UniTask StartTimer(CancellationToken token)
         {
@@ -97,7 +85,7 @@ namespace Laphed.Timers
                 if (token.IsCancellationRequested) token.ThrowIfCancellationRequested();
                 realTime -= TimersRatio.Seconds;
                 Tick();
-                await UniTask.Delay(TimersRatio.Milliseconds);
+                await UniTask.Delay(TimersRatio.Milliseconds).AttachExternalCancellation(token);
             }
             
             End();
@@ -105,7 +93,7 @@ namespace Laphed.Timers
 
         private void ClearCancellationToken()
         {
-            cancellationToken.Dispose();
+            cancellationToken?.Dispose();
             cancellationToken = null;
         }
     }

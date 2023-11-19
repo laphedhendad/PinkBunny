@@ -19,7 +19,7 @@ namespace Laphed.PinkBunny.UI
         {
             UiBinder uiBinder = Container.Resolve<UiBinder>();
             ITimer levelTimer = Container.ResolveId<ITimer>(TimerType.Level);
-            ITimer qteTimer = Container.ResolveId<IAcceleratingTimer>(TimerType.Qte);
+            ITimer qteTimer = Container.ResolveId<ITimer>(TimerType.Qte);
             ILevelEntryPoint levelEntryPoint = Container.Resolve<ILevelEntryPoint>();
             IBatteriesPool batteriesPool = Container.Resolve<IBatteriesPool>();
 

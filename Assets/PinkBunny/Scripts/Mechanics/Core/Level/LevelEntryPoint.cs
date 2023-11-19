@@ -35,7 +35,7 @@ namespace Laphed.PinkBunny
         private async UniTask BuildCurrentLevel()
         {
             await UniTask.RunOnThreadPool(()=>levelBuilder.Build(level, levelConfig));
-            batteriesPool.SetBatteriesAmount(levelConfig.GetTimerSettings().Count());
+            batteriesPool.SetBatteriesAmount(levelConfig.GetQteSetup().Count());
         }
     }
 }

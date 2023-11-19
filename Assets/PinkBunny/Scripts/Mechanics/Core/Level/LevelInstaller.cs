@@ -29,7 +29,7 @@ namespace Laphed.PinkBunny
         private void BindTimers()
         {
             Container.Bind<ITimer>().WithId(TimerType.Level).FromInstance(new Timer());
-            Container.Bind<IAcceleratingTimer>().WithId(TimerType.Qte).FromInstance(new AcceleratingTimer());
+            Container.Bind<ITimer>().WithId(TimerType.Qte).FromInstance(new Timer());
         }
 
         private void BindLevel()
